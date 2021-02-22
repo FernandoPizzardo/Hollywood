@@ -10,15 +10,17 @@ namespace DIO.Series
 		private string Descricao { get; set; }
 		private int Ano { get; set; }
         private bool Excluido {get; set;}
+		private Lancamento Lancamento {get; set;}
 
         // Métodos
-		public Serie(int id, Genero genero, string titulo, string descricao, int ano)
+		public Serie(int id, Genero genero, string titulo, string descricao, int ano, Lancamento lancamento)
 		{
 			this.Id = id;
 			this.Genero = genero;
 			this.Titulo = titulo;
 			this.Descricao = descricao;
 			this.Ano = ano;
+			this.Lancamento = lancamento;
             this.Excluido = false;
 		}
 
