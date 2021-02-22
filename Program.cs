@@ -83,12 +83,21 @@ namespace DIO.Series
 
 			Console.Write("Digite a Descrição da Série: ");
 			string entradaDescricao = Console.ReadLine();
+			
+			foreach (int i in Enum.GetValues(typeof(Lancamento)))
+			{
+				Console.WriteLine("{0}-{1}", i, Enum.GetName(typeof(Lancamento), i));
+			}
+			Console.WriteLine("Digite o tipo de lançamento");
+			int entradaLancamento = int.Parse(Console.ReadLine());
+
 
 			Serie atualizaSerie = new Serie(id: indiceSerie,
 										genero: (Genero)entradaGenero,
 										titulo: entradaTitulo,
 										ano: entradaAno,
-										descricao: entradaDescricao);
+										descricao: entradaDescricao,
+										lancamento: (Lancamento)entradaLancamento);
 
 			repositorio.Atualiza(indiceSerie, atualizaSerie);
 		}
@@ -118,10 +127,7 @@ namespace DIO.Series
 
 			// https://docs.microsoft.com/pt-br/dotnet/api/system.enum.getvalues?view=netcore-3.1
 			// https://docs.microsoft.com/pt-br/dotnet/api/system.enum.getname?view=netcore-3.1
-			foreach (int i in Enum.GetValues(typeof(Genero)))
-			{
-				Console.WriteLine("{0}-{1}", i, Enum.GetName(typeof(Genero), i));
-			}
+			
 			Console.Write("Digite o gênero entre as opções acima: ");
 			int entradaGenero = int.Parse(Console.ReadLine());
 
@@ -134,11 +140,20 @@ namespace DIO.Series
 			Console.Write("Digite a Descrição da Série: ");
 			string entradaDescricao = Console.ReadLine();
 
+			foreach (int i in Enum.GetValues(typeof(Lancamento)))
+			{
+				Console.WriteLine("{0}-{1}", i, Enum.GetName(typeof(Lancamento), i));
+			}
+			Console.WriteLine("Digite o tipo de lançamento");
+			int entradaLancamento = int.Parse(Console.ReadLine());
+
+
 			Serie novaSerie = new Serie(id: repositorio.ProximoId(),
 										genero: (Genero)entradaGenero,
 										titulo: entradaTitulo,
 										ano: entradaAno,
-										descricao: entradaDescricao);
+										descricao: entradaDescricao,
+										lancamento: (Lancamento)entradaLancamento);
 
 			repositorio.Insere(novaSerie);
 		}
