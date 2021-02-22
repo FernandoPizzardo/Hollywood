@@ -28,6 +28,9 @@ namespace DIO.Series
 					case "5":
 						VisualizarSerie();
 						break;
+					case "6":
+						InserirFilme();
+						break;
 					case "C":
 						Console.Clear();
 						break;
@@ -103,7 +106,7 @@ namespace DIO.Series
 		}
         private static void ListarSeries()
 		{
-			Console.WriteLine("Listar séries");
+			Console.WriteLine("Listar séries e filmes");
 
 			var lista = repositorio.Lista();
 
@@ -120,6 +123,41 @@ namespace DIO.Series
 				Console.WriteLine("#ID {0}: - {1} {2}", serie.retornaId(), serie.retornaTitulo(), (excluido ? "*Excluído*" : ""));
 			}
 		}
+		  private static void InserirFilme()
+		{
+			Console.WriteLine("Inserir novo filme");
+
+			// https://docs.microsoft.com/pt-br/dotnet/api/system.enum.getvalues?view=netcore-3.1
+			// https://docs.microsoft.com/pt-br/dotnet/api/system.enum.getname?view=netcore-3.1
+			
+			Console.Write("Digite o gênero entre as opções acima: ");
+			int entradaGenero = int.Parse(Console.ReadLine());
+
+			Console.Write("Digite o Título do Filme: ");
+			string entradaTitulo = "FILME" + Console.ReadLine();
+
+			Console.Write("Digite o Ano de Início do Filme: ");
+			int entradaAno = int.Parse(Console.ReadLine());
+
+			Console.Write("Digite a Descrição do Filme: ");
+			string entradaDescricao = Console.ReadLine();
+
+			foreach (int i in Enum.GetValues(typeof(Lancamento)))
+			{
+				Console.WriteLine("{0}-{1}", i, Enum.GetName(typeof(Lancamento), i));
+			}
+			Console.WriteLine("Digite o tipo de lançamento");
+			int entradaLancamento = int.Parse(Console.ReadLine());
+
+
+			Filme novaSerie = new Filme(id: repositorio.ProximoId(),
+										genero: (Genero)entradaGenero,
+										titulo: entradaTitulo,
+										ano: entradaAno,
+										descricao: entradaDescricao,
+										lancamento: (Lancamento)entradaLancamento);
+		}
+
 
         private static void InserirSerie()
 		{
@@ -169,6 +207,7 @@ namespace DIO.Series
 			Console.WriteLine("3- Atualizar série");
 			Console.WriteLine("4- Excluir série");
 			Console.WriteLine("5- Visualizar série");
+			Console.WriteLine("6 - Inserir novo Filme");
 			Console.WriteLine("C- Limpar Tela");
 			Console.WriteLine("X- Sair");
 			Console.WriteLine();
